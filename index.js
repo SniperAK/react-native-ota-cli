@@ -9,7 +9,7 @@ const fs              = require('fs');
 const md5             = require('md5-file');
 const colors          = require('colors');
 const {spawn, exec}   = require('child_process');
-const uploader        = require('uploader');
+const uploader        = require('./uploader');
 const { serialize } = require('v8');
 const readlline       = require('readline').createInterface({
   input: process.stdin,
