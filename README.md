@@ -4,12 +4,14 @@
 
 ### install
 ```
-$ npm install -g
+$ npm install react-native-ota-cli -g
 ```
 
 ### Useage
 ```
-Usage: build-bundle [ios] [android] [options]
+Usage: rn-ota [ios] [android] [options]
+
+Usage: ota [ios] [android] [options]
 
 Options
 
@@ -19,7 +21,6 @@ Options
       u, upload  : Upload bundle when build finished.
       r, reset   : Reset cache when bundle build.
       p, path    : Specify bundle build path.
-      d, dev     : Set developement bundle.
       h, help    : Help
 ```
 
