@@ -10,7 +10,6 @@ const md5             = require('md5-file');
 const colors          = require('colors');
 const {spawn, exec}   = require('child_process');
 const uploader        = require('./uploader');
-const { serialize } = require('v8');
 const readlline       = require('readline').createInterface({
   input: process.stdin,
   output: process.stdout
@@ -125,6 +124,10 @@ const bundleProperties    = localPackage[LOCAL_PACKAGE_KEY];
 const runPackager = ( opts )=>{
   say(Strings.build[opts.os]);
   let path = (opts.path + '/bundle').replace('//','/');
+  let entryFile = fs.existsSync( `${PATH}/index.tsx`) ? 'index.tsx': 
+                  fs.existsSync( `${PATH}/index.js`) ? 'index.js': 
+                  fs.existsSync( `${PATH}/index.${opts.os}.js`) ? `index.${opts.os}.js`: null;
+  if( !entryFile ) BundleMakerError(`Can\`t find entry file atleast one of index.js, index.tsx, index.${opts.os}.js.`);
   return execPromise('mkdir -p ' + path )
   .then(()=>{
     spinner.start();
@@ -132,7 +135,7 @@ const runPackager = ( opts )=>{
       'node',
       './node_modules/react-native/local-cli/cli.js',
       'bundle',
-      '--entry-file', rnPackage.version.versionToNumber() <= 4604 ? '"index.' + opts.os + '.js"' : '"index.js"',
+      // '--entry-file', rnPackage.version.versionToNumber() <= 4604 ? '"index.' + opts.os + '.js"' : '"index.js"',
       '--platform', opts.os,
       opts.resetCache ? '--reset-cache' : '',
       '--dev', opts.isDev ? 'true' : 'false',
