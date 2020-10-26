@@ -135,7 +135,7 @@ const runPackager = ( opts )=>{
       'node',
       './node_modules/react-native/local-cli/cli.js',
       'bundle',
-      // '--entry-file', rnPackage.version.versionToNumber() <= 4604 ? '"index.' + opts.os + '.js"' : '"index.js"',
+      '--entry-file', entryFile,
       '--platform', opts.os,
       opts.resetCache ? '--reset-cache' : '',
       '--dev', opts.isDev ? 'true' : 'false',
